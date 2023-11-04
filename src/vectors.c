@@ -8,9 +8,11 @@ vector_element_t magnitude(vector_t vec) {
     return root_func((vec[x] * vec[x]) + (vec[x] * vec[x]) + (vec[x] * vec[x]));
 }
 
-// Euler's method for integration in respect to time in 3 dimensions
-void update_velocity(vector_t accel_vec, vector_t velo_vec, float delta_t) {
-    velo_vec[x] += accel_vec[x] * delta_t;
-    velo_vec[y] += accel_vec[y] * delta_t;
-    velo_vec[z] += accel_vec[z] * delta_t;
+// Eulers method for integration in respect to time in 3 dimensions.
+// Example: pass acceleration vector to source and velocity to target to integrate acceleration
+void euler_step(vector_t source_vec, vector_t target_vec, float delta_t) {
+    target_vec[x] += source_vec[x] * delta_t;
+    target_vec[y] += source_vec[y] * delta_t;
+    target_vec[z] += source_vec[z] * delta_t;
 }
+
