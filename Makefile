@@ -25,9 +25,9 @@ $(BINDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Build example binaries
-$(BINDIR)/%: $(EXAMPLESDIR)/%.c
+$(BINDIR)/%: $(EXAMPLESDIR)/%.c $(OBJ)
 	@mkdir -p $(BINDIR)
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $^ -o $@ -lm  # Add -lm flag to link with the math library
 
 .PHONY: clean
 
