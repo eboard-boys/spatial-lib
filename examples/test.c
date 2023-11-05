@@ -21,30 +21,36 @@ int main(void) {
     vector_t velocity[3] = {0,0,0};
     float speed = 0;
     vector_t displacement[3] = {0,0,0};
+    float distance = 0;
     float arc_length = 0;
 
     // Append current elapsed time in seconds to array each cycle
     time_array[i_curr_time] = t;
     float delta_t = (float)time_array[i_curr_time] - time_array[i_prev_time];
-
-    // Retreieve raw acceleration vector values
-    acc_vec_t get_current_acceleration();
     
-    // Display acceleration
-    vector_euler_step(acceleration, acceleration, delta_t);
-    printf("Acceleration: %f", acceleration);
+    // Calculate and display acceleration
+    vector_euler_step(get_current_acceleration(), acceleration, delta_t);
+    printf("\nAcceleration: %f\n", acceleration);
 
-    // Display velocity
+    // Calculate and display velocity
     vector_euler_step(acceleration, velocity, delta_t);
     printf("Velocity: %f", velocity);
 
-    // Display speed (magnetude of velocity)
+    // Calculate and display speed (magnetude of velocity)
+    speed = magnitude(velocity);
+    printf("Speed: %f\n", speed);
 
-    // Display displacement
+    // Calculate and display displacement
     vector_euler_step(velocity, displacement, delta_t);
     printf("Displacement: %f", displacement);
 
-    // Display distance/arc length (odometer) - (integrate speed in respect to time)
+    // Calculate and display distance
+    euler_step(displacement, distance, delta_t);
+    printf("Distance: %f", distance);
+
+    // Calculate and display distance/arc length (odometer) - (integrate speed in respect to time)
+    euler_step(distance, arc_length, delta_t);
+    printf("Arc Length: %f", arc_length);
 
     // Assign current time to previous time before start of new clock cycle
     time_array[i_prev_time] = t;
