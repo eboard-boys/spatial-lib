@@ -16,6 +16,9 @@ void vector_euler_step(vector_t source_vec, vector_t target_vec, float delta_t) 
     target_vec[z] += source_vec[z] * delta_t;
 }
 
+// Eulers method for integration in respect to time for scalars.
+// This is used for calculating arc length.
 void euler_step(magnitude_t source, magnitude_t* destination, float delta_t) {
     *destination += source * delta_t;
 }
+
