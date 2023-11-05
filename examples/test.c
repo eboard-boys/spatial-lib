@@ -1,8 +1,8 @@
 /* Licensed under the LGPL. */
 #include <stdio.h>
 #include <time.h>
-#include "accel_dummy.h"
-#include "vectors.h"
+#include "../src/accel_dummy.h"
+#include "../src/vectors.h"
 
 int main(void) {
     // Start timer - time in seconds

@@ -7,3 +7,9 @@
 
 // elements are assigned indexes in the backing array
 enum direction {x, y, z};
+
+magnitude_t magnitude(vector_t vec);
+
+void vector_euler_step(vector_t source_vec, vector_t target_vec, float delta_t);
+
+void euler_step(magnitude_t source, magnitude_t* destination, float delta_t);
