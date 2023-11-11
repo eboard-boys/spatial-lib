@@ -24,6 +24,11 @@ where $\vec v$ is a vector representing a function for position.
 
 ### Coordinate systems
 Some calculations are better done with a change of coordinates, such the current incline on a hill.
+Spherical coordinates are a generalization of polar coordinates that allow this library to more easily work with angles.
+The covention for Spherical coordinates used is the ISO standard or "physics convention" as seen here:
+
+![Andeggs, Public domain, via Wikimedia Commons](https://upload.wikimedia.org/wikipedia/commons/4/4f/3D_Spherical.svg "Spherical Coordinates Convention")
+
 The following equations describe a change of coordinates from cartesian to spherical:
 ```math
 \begin{align}
@@ -35,7 +40,7 @@ r &= \sqrt{x^2 + y^2 + z^2} \\
  +\frac{\pi}{2} &\text{if } z = 0 \text{ and } xy \neq 0 \\
  \text{undefined} &\text{if } x=y=z = 0 \\
 \end{cases} \\
-\varphi &= \sgn(y)\arccos\frac{x}{\sqrt{x^2+y^2}} =
+\varphi &= sgn(y)\arccos\frac{x}{\sqrt{x^2+y^2}} =
 \begin{cases}
  \arctan(\frac{y}{x}) &\text{if } x > 0, \\
  \arctan(\frac{y}{x}) + \pi &\text{if } x < 0 \text{ and } y \geq 0, \\
