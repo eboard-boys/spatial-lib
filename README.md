@@ -51,3 +51,10 @@ r &= \sqrt{x^2 + y^2 + z^2} \\
 \end{cases}
 \end{align}
 ```
+
+The following equations describe a change of coordinates from spherical to cartesian:
+```math
+x &= r \sin (\theta) \cos (\phi)
+y &= r \sin (\theta) \sin (\phi)
+z &= r \cos (\theta)
+```
