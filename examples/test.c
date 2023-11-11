@@ -18,10 +18,10 @@ int main(void) {
     // Initialize values
     // float t = 0;
     acc_vec_t raw_acceleration;
-    vector_element_t acceleration[3] = {0,0,0};
-    vector_element_t velocity[3] = {0,0,0};
+    vector_t acceleration[3] = {0,0,0};
+    vector_t velocity[3] = {0,0,0};
     float speed = 0;
-    vector_element_t displacement[3] = {0,0,0};
+    vector_t displacement[3] = {0,0,0};
     float distance = 0;
     float arc_length = 0;
 
