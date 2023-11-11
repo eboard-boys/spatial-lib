@@ -23,6 +23,12 @@ void euler_step(magnitude_t source, magnitude_t* destination, float delta_t) {
     *destination += source * delta_t;
 }
 
+void vector_forward_difference(vector_t* source_vec, vector_t* target_vec, float delta_t) {
+    // TODO: implement
+}
+
+// Change of coordinates from cartesian to spherical.
+// Does not modify the vector passed to it.
 vector_t* cartesian_to_spherical(vector_t* cartesian_vec) {
     vector_t* spherical_vec = malloc(sizeof(vector_t) * 3);
     spherical_vec[r] = magnitude(cartesian_vec);
@@ -32,6 +38,8 @@ vector_t* cartesian_to_spherical(vector_t* cartesian_vec) {
     return spherical_vec;
 }
 
+// Change of coordinates from spherical to cartesian.
+// Does not modify the vector passed to it.
 vector_t* spherical_to_cartesian(vector_t* spherical_vec) {
     vector_t* cartesian_vec = malloc(sizeof(vector_t) * 3);
     cartesian_vec[x] = spherical_vec[r] * sin(spherical_vec[theta] * cos(spherical_vec[phi]));
