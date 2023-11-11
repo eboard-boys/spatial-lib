@@ -54,7 +54,9 @@ r &= \sqrt{x^2 + y^2 + z^2} \\
 
 The following equations describe a change of coordinates from spherical to cartesian:
 ```math
-x &= r \sin (\theta) \cos (\phi)
-y &= r \sin (\theta) \sin (\phi)
-z &= r \cos (\theta)
+\begin{align}
+ x &= r \sin\theta \, \cos\varphi, \\
+ y &= r \sin\theta \, \sin\varphi, \\
+ z &= r \cos\theta.
+\end{align}
 ```
