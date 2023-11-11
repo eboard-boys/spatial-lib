@@ -18,7 +18,7 @@ where $\vec r$ is vector representing a function for position.
 Because of the nature of accelerometers, acceleration is actually the initial measurement everything else is calculated from.
 Thus, a more accurate representation of the calculations done internally may be
 ```math
-s = \int_a^b{|d \vec v}|dt
+s = \int_a^b{|\vec v}|dt
 ```
 where $\vec v$ is a vector representing a function for position.
 
