@@ -2,9 +2,14 @@
 Library for determining acceleration, velocity, speed, and arc length.
 
 ## Mathematic functionality
+This mathematic functionality is intended to be decoupled from any hardware implementation details.
+Drivers for initialization and retrieving values from the accelerometer are independent of this.
+For testing the math functions, a dummy driver (will be made) available.
+
+### Determining velocity, speed, and distance
 This library gives helper functions for preforming Euler's Method in 3D space.
 
-For calculating arc length, the formula referenced is
+For calculating arc length (the distance traveled), the formula referenced is
 ```math
 s = \int_a^b{|{{d \vec r}\over {dt}}}|dt
 ```
@@ -17,7 +22,27 @@ s = \int_a^b{|d \vec v}|dt
 ```
 where $\vec v$ is a vector representing a function for position.
 
-This mathematic functionality is intended to be decoupled from any hardware implementation details.
-Drivers for initialization and retrieving values from the accelerometer are independent of this.
-
-For testing the math functions, a dummy driver (will be made) available.
+### Coordinate systems
+Some calculations are better done with a change of coordinates, such the current incline on a hill.
+The following equations describe a change of coordinates from cartesian to spherical:
+```math
+\begin{align}
+r &= \sqrt{x^2 + y^2 + z^2} \\
+\theta &= \arccos\frac{z}{\sqrt{x^2 + y^2 + z^2}} = \arccos\frac{z}{r}=
+\begin{cases}
+ \arctan\frac{\sqrt{x^2+y^2}}{z} &\text{if } z > 0 \\
+ \pi +\arctan\frac{\sqrt{x^2+y^2}}{z} &\text{if } z < 0 \\
+ +\frac{\pi}{2} &\text{if } z = 0 \text{ and } xy \neq 0 \\
+ \text{undefined} &\text{if } x=y=z = 0 \\
+\end{cases} \\
+\varphi &= \sgn(y)\arccos\frac{x}{\sqrt{x^2+y^2}} =
+\begin{cases}
+ \arctan(\frac{y}{x}) &\text{if } x > 0, \\
+ \arctan(\frac{y}{x}) + \pi &\text{if } x < 0 \text{ and } y \geq 0, \\
+ \arctan(\frac{y}{x}) - \pi &\text{if } x < 0 \text{ and } y < 0, \\
+ +\frac{\pi}{2} &\text{if } x = 0 \text{ and } y > 0, \\
+ -\frac{\pi}{2} &\text{if } x = 0 \text{ and } y < 0, \\
+ \text{undefined} &\text{if } x = 0 \text{ and } y = 0.
+\end{cases}
+\end{align}
+```
