@@ -31,3 +31,11 @@ vector_t* cartesian_to_spherical(vector_t* cartesian_vec) {
     spherical_vec[phi] = sgn * acos(cartesian_vec[x]/root_func(cartesian_vec[x]*cartesian_vec[x] + cartesian_vec[y]*cartesian_vec[y]));
     return spherical_vec;
 }
+
+vector_t* spherical_to_cartesian(vector_t* spherical_vec) {
+    vector_t* cartesian_vec = malloc(sizeof(vector_t) * 3);
+    cartesian_vec[x] = spherical_vec[r] * sin(spherical_vec[theta] * cos(spherical_vec[phi]));
+    cartesian_vec[y] = spherical_vec[r] * sin(spherical_vec[theta] * sin(spherical_vec[phi]));
+    cartesian_vec[z] = spherical_vec[r] * cos(spherical_vec[theta]);
+    return cartesian_vec;
+}
