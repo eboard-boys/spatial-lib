@@ -23,7 +23,6 @@ int main(void) {
     vector_t velocity[3] = {0,0,0};
     float speed = 0;
     vector_t displacement[3] = {0,0,0};
-    float distance = 0;
     float arc_length = 0;
 
     // Append current elapsed time in seconds to array each cycle
