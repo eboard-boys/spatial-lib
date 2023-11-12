@@ -4,14 +4,15 @@
 #include "../src/accel_dummy.h"
 #include "../src/vectors.h"
 
+// Index values for positions of values within time_array
+#define i_prev_time 0
+#define i_curr_time 1
+
 int main(void) {
     // Start timer - time in seconds
     time_t t = time(NULL);
     // Array that stores time at previous clock cycle and current time
-    time_t time_array[2] = {};
-    // Index values for positions of values within time_array
-    int i_prev_time = 0;
-    int i_curr_time = 1;
+    time_t time_array[2] = {0,0};
 
     init_accelerometer();
 
