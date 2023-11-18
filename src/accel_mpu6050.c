@@ -2,6 +2,9 @@
  * Licensed/sub-licensed under the LGPL. Check the mpu6050 directory for attribution.*/
 #include "accel_mpu6050.h"
 
+
+// Initialize the accelerometer
+// Reused from library example.
 uint8_t mpu6050_basic_init(mpu6050_address_t addr_pin)
 {
     uint8_t res;

@@ -1,4 +1,4 @@
-#include "driver_mpu6050_interface.h"
+#include "../lib/mpu6050/interface/driver_mpu6050_interface.h"
 
 #ifdef __cplusplus
 extern "C"{

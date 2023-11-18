@@ -37,7 +37,7 @@
 #ifndef DRIVER_MPU6050_INTERFACE_H
 #define DRIVER_MPU6050_INTERFACE_H
 
-#include "driver_mpu6050.h"
+#include "../src/driver_mpu6050.h"
 
 #ifdef __cplusplus
 extern "C"{
