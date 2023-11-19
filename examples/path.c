@@ -1,7 +1,7 @@
 #include "pbPlots.h"
 #include "supportLib.h"
 
-int main() {
+int main(void) {
     double x[] = {-1,0,1,2,3,4,5,6};
     double y[] = {-5,-4,-3,-2,1,0,1,2};
 
