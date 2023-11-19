@@ -18,7 +18,7 @@ int main(void) {
     vector_t acceleration[3] = {0,0,0};
     vector_t velocity[3] = {0,0,0};
     float speed = 0;
-    vector_t displacement[3] = {0,0,0};
+    vector_t position[3] = {0,0,0};
     float arc_length = 0;
     
     // Type ctrl + c to end program
@@ -46,9 +46,9 @@ int main(void) {
         speed = magnitude(velocity);
         printf("Speed: %f\n", speed);
 
-        // Calculate and display displacement
-        vector_euler_step(velocity, displacement, delta_t);
-        printf("Displacement: <%f, %f, %f>\n", displacement[x], displacement[y], displacement[z]);
+        // Calculate and display position
+        vector_euler_step(velocity, position, delta_t);
+        printf("Position: <%f, %f, %f>\n", position[x], position[y], position[z]);
 
         // Calculate and display distance/arc length (odometer) - (integrate speed in respect to time)
         euler_step(magnitude(velocity), &arc_length, delta_t);
