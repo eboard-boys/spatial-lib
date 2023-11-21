@@ -60,3 +60,9 @@ The following equations describe a change of coordinates from spherical to carte
  z &= r \cos\theta.
 \end{align}
 ```
+
+### Adaptive Throttle
+
+![XY Path Plot](https://github.com/eboard-boys/spatial-lib/blob/adp-throttle-demo/examples/xy_path_plot.png?raw=true "Function of E-Longboard Path from Top Down (x,y)")
+
+![Z Path Plot](https://github.com/eboard-boys/spatial-lib/blob/adp-throttle-demo/examples/z_path_plot.png?raw=true "Function of Elevation Path of E-Longboard (z)")
