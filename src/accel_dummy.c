@@ -11,7 +11,7 @@ const int RNG_PRIME = 2147483647;
 int seed;
 
 // Init the fake accelerometer by initializing the RNG
-void init_accelerometer() {
+void init_dummy_accelerometer() {
     seed = time(NULL);
 }
 

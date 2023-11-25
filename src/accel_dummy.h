@@ -6,7 +6,7 @@ typedef struct {
 } acc_vec_t;
 
 // Initialize MPU 6050 accelerometer
-void init_accelerometer();
+void init_dummy_accelerometer();
 
 // Return acceleration vector value
 acc_vec_t get_current_acceleration();

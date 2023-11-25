@@ -5,14 +5,16 @@
 
 // Initialize the accelerometer
 // Reused from library example.
-uint8_t mpu6050_basic_init(mpu6050_address_t addr_pin)
+static mpu6050_handle_t gs_handle;
+
+uint8_t mpu6050_basic_init()
 {
     uint8_t res;
 
     /* link interface function */
     DRIVER_MPU6050_LINK_INIT(&gs_handle, mpu6050_handle_t);
     DRIVER_MPU6050_LINK_IIC_INIT(&gs_handle, mpu6050_interface_iic_init);
-//    DRIVER_MPU6050_LINK_IIC_DEINIT(&gs_handle, mpu6050_interface_iic_deinit);
+    DRIVER_MPU6050_LINK_IIC_DEINIT(&gs_handle, mpu6050_interface_iic_deinit);
     DRIVER_MPU6050_LINK_IIC_READ(&gs_handle, mpu6050_interface_iic_read);
     DRIVER_MPU6050_LINK_IIC_WRITE(&gs_handle, mpu6050_interface_iic_write);
     DRIVER_MPU6050_LINK_DELAY_MS(&gs_handle, mpu6050_interface_delay_ms);
@@ -20,7 +22,7 @@ uint8_t mpu6050_basic_init(mpu6050_address_t addr_pin)
     DRIVER_MPU6050_LINK_RECEIVE_CALLBACK(&gs_handle, mpu6050_interface_receive_callback);
 
     /* set the addr pin */
-    res = mpu6050_set_addr_pin(&gs_handle, addr_pin);
+    res = mpu6050_set_addr_pin(&gs_handle, ACCEL_SELECTED__AD0_PIN);
     if (res != 0)
     {
         mpu6050_interface_debug_print("mpu6050: set addr pin failed.\n");
@@ -449,6 +451,38 @@ uint8_t mpu6050_basic_init(mpu6050_address_t addr_pin)
 
         return 1;
     }
+
+    return 0;
+}
+
+uint8_t mpu6050_basic_read(float g[3], float dps[3])
+{
+    uint16_t len;
+    int16_t accel_raw[3];
+    int16_t gyro_raw[3];
+    float accel[3];
+    float gyro[3];
+
+    /* set 1 */
+    len = 1;
+
+    /* read data */
+    if (mpu6050_read(&gs_handle,
+                    (int16_t (*)[3])&accel_raw, (float (*)[3])&accel,
+                    (int16_t (*)[3])&gyro_raw, (float (*)[3])&gyro,
+                     &len) != 0
+                    )
+    {
+        return 1;
+    }
+
+    /* copy the data */
+    g[0] = accel[0];
+    g[1] = accel[1];
+    g[2] = accel[2];
+    dps[0] = gyro[0];
+    dps[1] = gyro[1];
+    dps[2] = gyro[2];
 
     return 0;
 }

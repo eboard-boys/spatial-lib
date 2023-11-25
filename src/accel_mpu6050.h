@@ -25,6 +25,11 @@ extern "C"{
 #define ACCEL_SELECTED__FSYNC_INTERRUPT_LEVEL          MPU6050_PIN_LEVEL_LOW                     /**< low level */
 #define ACCEL_SELECTED__IIC_MASTER                     MPU6050_BOOL_FALSE                        /**< disable iic master */
 #define ACCEL_SELECTED__IIC_BYPASS                     MPU6050_BOOL_FALSE                        /**< disable iic bypass */
+#define ACCEL_SELECTED__AD0_PIN						   MPU6050_ADDRESS_AD0_HIGH				 /**< AD0 pin set LOW */
+
+uint8_t mpu6050_basic_init();
+
+uint8_t mpu6050_basic_read(float g[3], float dps[3]);
 
 #ifdef __cplusplus
 }

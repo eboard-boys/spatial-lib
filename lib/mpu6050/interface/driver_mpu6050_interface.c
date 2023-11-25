@@ -36,12 +36,21 @@
 
 #include "driver_mpu6050_interface.h"
 // Because of how STM32CubeMX auto-generates files, this include is necessary
-#include "main.h"
+//#include "main.h"
 #include "cmsis_os.h"
 
-#define I2C_TIMEOUT 50
+#define I2C_TIMEOUT 200
 
 I2C_HandleTypeDef* hi2c_accel;
+
+uint8_t set_iic_handler(I2C_HandleTypeDef* i2c_handler) {
+	if (i2c_handler) {
+		hi2c_accel = i2c_handler;
+		return 0;
+	} else {
+		return 1;
+	}
+}
 
 /**
  * @brief  interface i2c bus init
@@ -50,15 +59,14 @@ I2C_HandleTypeDef* hi2c_accel;
  *         - 0 success
  * @note   Sets the i2c handler pointer
  */
-uint8_t mpu6050_interface_iic_init(I2C_HandleTypeDef* i2c_handler) {
-	hi2c_accel = i2c_handler;
+uint8_t mpu6050_interface_iic_init() {
 	return 0;
 }
 
 /**
  * @brief  interface i2c bus deinit (deprecated)
  * @return status code
- *         - 1 failed
+ *         - 0 success
  * @note   The I2C initialization is handled elsewhere, do not use!
  */
 uint8_t mpu6050_interface_iic_deinit(void) {
@@ -110,7 +118,7 @@ void mpu6050_interface_delay_ms(uint32_t ms) {
  * @note      none
  */
 void mpu6050_interface_debug_print(const char *const fmt, ...) {
-	print(fmt);
+	printf(fmt);
 }
 
 /**

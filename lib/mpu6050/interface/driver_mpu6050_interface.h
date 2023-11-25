@@ -38,6 +38,7 @@
 #define DRIVER_MPU6050_INTERFACE_H
 
 #include "../src/driver_mpu6050.h"
+#include "stm32l4xx_hal.h"
 
 #ifdef __cplusplus
 extern "C"{
@@ -50,14 +51,24 @@ extern "C"{
  * @{
  */
 
+
 /**
- * @brief  interface i2c bus init
+ * @brief  interface i2c bus select
  * @param[in] hi2c_accel is the i2c handler pointer
  * @return status code
  *         - 0 success
+ *         - 1 failure
  * @note   Sets the i2c handler pointer
  */
-uint8_t mpu6050_interface_iic_init(I2C_HandleTypeDef* hi2c_accel);
+uint8_t set_iic_handler(I2C_HandleTypeDef* i2c_handler);
+
+/**
+ * @brief  interface i2c bus init (deprecated
+ * @return status code
+ *         - 0 success
+ * @note	The I2C initialization is handled elsewhere, do not use!
+ */
+uint8_t mpu6050_interface_iic_init();
 
 /**
  * @brief  interface i2c bus deinit (deprecated)
