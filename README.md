@@ -1,5 +1,10 @@
 # spatial-lib
-Library for determining acceleration, velocity, speed, and arc length.
+Library for determining acceleration, velocity, speed, and arc length from an MPU6050 accelerometer.
+
+## Hardware Driver
+This driver is very loosely adapted from parts of the repository [here](https://github.com/hepingood/mpu6050).
+The driver is specific to the STM32 enviroment and made to reduce the amount of abstraction and unneeded functionality.
+The code adapted from is MIT licensed and compatible with the LGPL. Check the related source files for more information.
 
 ## Mathematic functionality
 This mathematic functionality is intended to be decoupled from any hardware implementation details.
@@ -20,7 +25,7 @@ Thus, a more accurate representation of the calculations done internally may be
 ```math
 s = \int_a^b{|\vec v}|dt
 ```
-where $\vec v$ is a vector representing a function for position.
+where $\vec v$ is a vector representing a function for velocity.
 
 ### Coordinate systems
 Some calculations are better done with a change of coordinates, such the current incline on a hill.
@@ -60,3 +65,7 @@ The following equations describe a change of coordinates from spherical to carte
  z &= r \cos\theta.
 \end{align}
 ```
+
+### Directional Derivative
+
+### Cross Product
