@@ -67,4 +67,4 @@
 #define MPU_PWR_MGMT_STBY_GYRO_Y (1 << 1)
 #define MPU_PWR_MGMT_STBY_GYRO_Z 1
 
-HAL_StatusTypeDef init_mpu(I2C_HandleTypeDef* i2c_handler, UART_HandleTypeDef* uart_handler);
+HAL_StatusTypeDef init_mpu(I2C_HandleTypeDef* i2c_handler, UART_HandleTypeDef* debug_handler);
