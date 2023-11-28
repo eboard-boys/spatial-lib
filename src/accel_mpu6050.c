@@ -14,7 +14,7 @@ UART_HandleTypeDef* uart_debug_handler;
 HAL_StatusTypeDef init_mpu(I2C_HandleTypeDef* i2c_handler, UART_HandleTypeDef* debug_handler) {
 	hi2c_mpu = i2c_handler;
 	uart_debug_handler = debug_handler;
-	HAL_StatusTypeDef ret = HAL_ERROR;
+	HAL_StatusTypeDef ret;
     // Write power management configuration
 	uint8_t data = MPU_PWR_MGMT_1_DEFAULT_CONFIG;
 	ret = HAL_I2C_Mem_Write(hi2c_mpu, MPU_ADDRESS, MPU_REG_PWR_MGMT_1, I2C_MEMADD_SIZE_8BIT, &data, 1, I2C_DELAY);
@@ -47,7 +47,7 @@ HAL_StatusTypeDef init_mpu(I2C_HandleTypeDef* i2c_handler, UART_HandleTypeDef* d
 }
 
 HAL_StatusTypeDef get_accel(double accel[3]) {
-	HAL_StatusTypeDef ret = HAL_ERROR;
+	HAL_StatusTypeDef ret;
 	uint8_t accel_buf[6];
 	ret = HAL_I2C_Mem_Read(hi2c_mpu, MPU_ADDRESS, MPU_REG_ACEL_DATA, I2C_MEMADD_SIZE_8BIT, accel_buf, 6, I2C_DELAY);
 	if (ret) {
