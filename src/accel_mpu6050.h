@@ -1,6 +1,7 @@
 #include "stm32l4xx_hal.h"
 
 #define MPU_AD0_VALUE 0
+#define I2C_DELAY 50
 
 #if MPU_AD0_VALUE == 0
 // Address of MPU6050 when AD0 pin in low
@@ -18,6 +19,7 @@
 #define MPU_REG_ACEL_DATA 0x3B
 #define MPU_REG_GYRO_DATA 0x43
 #define MPU_REG_PWR_MGMT_1 0x6B
+#define MPU_REG_PWR_MGMT_2 0x6C
 
 // Sync/Filter Configs
 // Higher delays allow for intense filtering
@@ -40,6 +42,13 @@
 #define MPU_ACCEL_RANGE_4G (1 << 3)
 #define MPU_ACCEL_RANGE_8G (2 << 3)
 #define MPU_ACCEL_RANGE_16G (3 << 3)
+
+// Accelerometer Sensitivity Dividers
+#define MPU_ACCEL_RANGE_2G_LSB 16384
+#define MPU_ACCEL_RANGE_4G_LSB 8192
+#define MPU_ACCEL_RANGE_8G_LSB 4096
+#define MPU_ACCEL_RANGE_16G_LSB 2048
+
 
 // Power Managment Configs
 // Power Management 1 Register
