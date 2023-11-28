@@ -37,6 +37,12 @@
 #define MPU_GYRO_RANGE_1000_DPS (2 << 3)
 #define MPU_GYRO_RANGE_2000_DPS (3 << 3)
 
+// Gyro Sensitivity Dividers
+#define MPU_GYRO_RANGE_250_DPS_LSB 131
+#define MPU_GYRO_RANGE_500_DPS_LSB 65.5
+#define MPU_GYRO_RANGE_1000_DPS_LSB 32.8
+#define MPU_GYRO_RANGE_2000_DPS_LSB 16.4
+
 // Accelerometer Configs
 #define MPU_ACCEL_RANGE_2G 0
 #define MPU_ACCEL_RANGE_4G (1 << 3)
@@ -76,4 +82,9 @@
 #define MPU_PWR_MGMT_STBY_GYRO_Y (1 << 1)
 #define MPU_PWR_MGMT_STBY_GYRO_Z 1
 
+// Constants for unit conversion
+#define GS_TO_MPSPS 9.8
+
 HAL_StatusTypeDef init_mpu(I2C_HandleTypeDef* i2c_handler, UART_HandleTypeDef* debug_handler);
+
+HAL_StatusTypeDef get_accel(double accel[3]);
