@@ -37,7 +37,7 @@ HAL_StatusTypeDef init_mpu(I2C_HandleTypeDef* i2c_handler, UART_HandleTypeDef* d
 		return ret;
 	}
     // Write accelerometer configuration
-	data = MPU_ACCEL_RANGE_2G;
+	data = MPU_ACCEL_RANGE_4G;
 	ret = HAL_I2C_Mem_Write(hi2c_mpu, MPU_ADDRESS, MPU_REG_ACCEL_CONFIG, I2C_MEMADD_SIZE_8BIT, &data, 1, I2C_DELAY);
 	if (ret) {
 		DEBUG_PRINT("Failed to initialize accelerometer configuration");
@@ -54,12 +54,12 @@ HAL_StatusTypeDef get_accel(double accel[3]) {
 		DEBUG_PRINT("Failed to fetch accelerometer value");
 		return ret;
 	}
-	accel[0] = (accel_buf[0] << 8) | accel_buf[1];
-	accel[1] = (accel_buf[2] << 8) | accel_buf[3];
-	accel[2] = (accel_buf[4] << 8) | accel_buf[5];
+	int16_t accel_raw_x = (accel_buf[0] << 8) | accel_buf[1];
+	int16_t accel_raw_y = (accel_buf[2] << 8) | accel_buf[3];
+	int16_t accel_raw_z = (accel_buf[4] << 8) | accel_buf[5];
 
-	accel[0] /= MPU_ACCEL_RANGE_2G_LSB;
-	accel[1] /= MPU_ACCEL_RANGE_2G_LSB;
-	accel[2] /= MPU_ACCEL_RANGE_2G_LSB;
+	accel[0] = (double)accel_raw_x / MPU_ACCEL_RANGE_4G_LSB;
+	accel[1] = (double)accel_raw_y / MPU_ACCEL_RANGE_4G_LSB;
+	accel[2] = (double)accel_raw_z / MPU_ACCEL_RANGE_4G_LSB;
 	return HAL_OK;
 }
