@@ -1,5 +1,5 @@
 // type used for vectors and their elements
-#define vector_t float
+#define vector_t double
 #define root_func sqrtf
 // type used for vector magnitude
 #define magnitude_t vector_t
