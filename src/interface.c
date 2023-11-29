@@ -13,6 +13,10 @@ HAL_StatusTypeDef init_spatial(I2C_HandleTypeDef* i2c_handler, UART_HandleTypeDe
 //		DEBUG_PRINT("Failed hardware initialization");
 		return ret;
 	}
+	ret = calibrate_mpu();
+	if (ret) {
+		return ret;
+	}
 	return HAL_OK;
 }
 

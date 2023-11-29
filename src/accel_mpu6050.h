@@ -85,6 +85,9 @@
 // Constants for unit conversion
 #define GS_TO_MPSPS 9.8
 
+// Calibration constants
+#define CALIBRATION_ITERATIONS 1500
+
 HAL_StatusTypeDef init_mpu(I2C_HandleTypeDef* i2c_handler, UART_HandleTypeDef* debug_handler);
 
 HAL_StatusTypeDef get_accel(double accel[3]);
