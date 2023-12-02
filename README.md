@@ -62,7 +62,11 @@ The following equations describe a change of coordinates from spherical to carte
 ```
 
 ### Adaptive Throttle
-
+```math
+XY-Path Plot Example Equation: 1.75\sin(1t)+(0.1t)
+```
 ![XY Path Plot](https://github.com/eboard-boys/spatial-lib/blob/adp-throttle-demo/examples/xy_path_plot.png?raw=true "Function of E-Longboard Path from Top Down (x,y)")
-
+```math
+Z-Path Plot Example Equation: \sin(0.75t)
+```
 ![Z Path Plot](https://github.com/eboard-boys/spatial-lib/blob/adp-throttle-demo/examples/z_path_plot.png?raw=true "Function of Elevation Path of E-Longboard (z)")
