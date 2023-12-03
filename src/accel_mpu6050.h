@@ -1,7 +1,7 @@
 #include "stm32l4xx_hal.h"
 
 #define MPU_AD0_VALUE 0
-#define I2C_DELAY 50
+#define I2C_DELAY 100
 
 #if MPU_AD0_VALUE == 0
 // Address of MPU6050 when AD0 pin in low
@@ -83,7 +83,8 @@
 #define MPU_PWR_MGMT_STBY_GYRO_Z 1
 
 // Constants for unit conversion
-#define GS_TO_MPSPS 9.8
+#define NO_CONVERSION 1
+#define GS_TO_MPSPS 9.81
 
 // Calibration constants
 #define CALIBRATION_ITERATIONS 1500
