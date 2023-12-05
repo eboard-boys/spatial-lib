@@ -3,16 +3,16 @@
 #include "../include/interface.h"
 
 // Externally accessible via the interface header
-double current_acceleration[3] = {0.0, 0.0, 0.0};
+vector_t current_acceleration[3] = {0.0, 0.0, 0.0};
 
-double current_velocity[3] = {0.0, 0.0, 0.0};
-double current_speed = 0;
+vector_t current_velocity[3] = {0.0, 0.0, 0.0};
+magnitude_t current_speed = 0;
 
-double current_position[3] = {0.0, 0.0, 0.0};
-double current_distance = 0;
+vector_t current_position[3] = {0.0, 0.0, 0.0};
+magnitude_t current_distance = 0;
 
 // Internal globals
-double accleration_sample_array[ACCEL_SAMPLES][3];
+vector_t accleration_sample_array[ACCEL_SAMPLES][3];
 uint8_t accel_sample_index = 0;
 
 HAL_StatusTypeDef init_spatial(I2C_HandleTypeDef* i2c_handler, UART_HandleTypeDef* debug_handler) {

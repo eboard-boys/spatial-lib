@@ -1,4 +1,5 @@
 #include "stm32l4xx_hal.h"
+#include "vectors.h"
 
 #define MPU_AD0_VALUE 0
 #define I2C_DELAY 100
@@ -91,4 +92,6 @@
 
 HAL_StatusTypeDef init_mpu(I2C_HandleTypeDef* i2c_handler, UART_HandleTypeDef* debug_handler);
 
-HAL_StatusTypeDef get_accel(double accel[3]);
+HAL_StatusTypeDef calibrate_mpu();
+
+HAL_StatusTypeDef get_accel(vector_t accel[3]);

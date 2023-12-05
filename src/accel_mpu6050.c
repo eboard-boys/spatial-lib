@@ -10,11 +10,11 @@ UART_HandleTypeDef* uart_debug_handler;
 #define DEBUG_PRINT(message) \
     HAL_UART_Transmit(uart_debug_handler, (uint8_t*)message, strlen(message), I2C_DELAY)
 
-double accel_bias_x = 0;
-double accel_bias_y = 0;
-double accel_bias_z = 0;
+magnitude_t accel_bias_x = 0;
+magnitude_t accel_bias_y = 0;
+magnitude_t accel_bias_z = 0;
 
-double gravitational_acceleration[3] = {0, 0, 0};
+vector_t gravitational_acceleration[3] = {0, 0, 0};
 
 float unit_conversion = NO_CONVERSION;
 
@@ -56,9 +56,9 @@ HAL_StatusTypeDef init_mpu(I2C_HandleTypeDef* i2c_handler, UART_HandleTypeDef* d
 
 HAL_StatusTypeDef calibrate_mpu() {
 	HAL_StatusTypeDef ret;
-	double target_vector[3] = {1, 0, 0};
-	double measured_accel[3];
-	double preliminary_bias[3];
+	vector_t target_vector[3] = {1, 0, 0};
+	vector_t measured_accel[3];
+	vector_t preliminary_bias[3];
 	for (int i = 0; i < CALIBRATION_ITERATIONS; i++) {
 		ret = get_accel(measured_accel);
 		if (ret) {
@@ -81,7 +81,7 @@ HAL_StatusTypeDef calibrate_mpu() {
 	return HAL_OK;
 }
 
-HAL_StatusTypeDef get_accel(double accel[3]) {
+HAL_StatusTypeDef get_accel(vector_t accel[3]) {
 	HAL_StatusTypeDef ret;
 	uint8_t accel_buf[6];
 	ret = HAL_I2C_Mem_Read(hi2c_mpu, MPU_ADDRESS, MPU_REG_ACEL_DATA, I2C_MEMADD_SIZE_8BIT, accel_buf, 6, I2C_DELAY);
@@ -93,12 +93,12 @@ HAL_StatusTypeDef get_accel(double accel[3]) {
 	int16_t accel_raw_y = (accel_buf[2] << 8) | accel_buf[3];
 	int16_t accel_raw_z = (accel_buf[4] << 8) | accel_buf[5];
 
-	accel[0] = (double)accel_raw_x / MPU_ACCEL_RANGE_8G_LSB + accel_bias_x - gravitational_acceleration[0];
-	accel[1] = (double)accel_raw_y / MPU_ACCEL_RANGE_8G_LSB + accel_bias_y - gravitational_acceleration[1];
-	accel[2] = (double)accel_raw_z / MPU_ACCEL_RANGE_8G_LSB + accel_bias_z - gravitational_acceleration[2];
+	accel[0] = (vector_t)accel_raw_x / MPU_ACCEL_RANGE_8G_LSB + accel_bias_x - gravitational_acceleration[0];
+	accel[1] = (vector_t)accel_raw_y / MPU_ACCEL_RANGE_8G_LSB + accel_bias_y - gravitational_acceleration[1];
+	accel[2] = (vector_t)accel_raw_z / MPU_ACCEL_RANGE_8G_LSB + accel_bias_z - gravitational_acceleration[2];
 
-	accel[0] = (double)(int)(accel[0] * 10) / 10 * unit_conversion;
-	accel[1] = (double)(int)(accel[1] * 10) / 10 * unit_conversion;
-	accel[2] = (double)(int)(accel[2] * 10) / 10 * unit_conversion;
+	accel[0] = (vector_t)(int)(accel[0] * 10) / 10 * unit_conversion;
+	accel[1] = (vector_t)(int)(accel[1] * 10) / 10 * unit_conversion;
+	accel[2] = (vector_t)(int)(accel[2] * 10) / 10 * unit_conversion;
 	return HAL_OK;
 }
