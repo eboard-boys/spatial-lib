@@ -62,7 +62,9 @@ HAL_StatusTypeDef calibrate_mpu() {
 	for (int i = 0; i < CALIBRATION_ITERATIONS; i++) {
 		ret = get_accel(measured_accel);
 		if (ret) {
-			DEBUG_PRINT("Failed to calibrate accelerometer\r\n");
+			char fail_message[80];
+			sprintf(fail_message, "Failed to calibrate accelerometer (1) call %d\r\n", i);
+			DEBUG_PRINT(fail_message);
 			return ret;
 		}
 		for (int j = 0; j < 3; j++) {
@@ -74,7 +76,7 @@ HAL_StatusTypeDef calibrate_mpu() {
 	accel_bias_z = target_vector[2] - (preliminary_bias[2] / CALIBRATION_ITERATIONS);
 	ret = get_accel(gravitational_acceleration);
 	if (ret) {
-		DEBUG_PRINT("Failed to calibrate accelerometer\r\n");
+		DEBUG_PRINT("Failed to calibrate accelerometer (2)\r\n");
 		return ret;
 	}
 	unit_conversion = GS_TO_MPSPS;
@@ -84,7 +86,7 @@ HAL_StatusTypeDef calibrate_mpu() {
 HAL_StatusTypeDef get_accel(vector_t accel[3]) {
 	HAL_StatusTypeDef ret;
 	uint8_t accel_buf[6];
-	ret = HAL_I2C_Mem_Read(hi2c_mpu, MPU_ADDRESS, MPU_REG_ACEL_DATA, I2C_MEMADD_SIZE_8BIT, accel_buf, 6, I2C_DELAY);
+	ret = HAL_I2C_Mem_Read(hi2c_mpu, MPU_ADDRESS, MPU_REG_ACEL_DATA, I2C_MEMADD_SIZE_8BIT, accel_buf, 6, 100);
 	if (ret) {
 		DEBUG_PRINT("Failed to fetch accelerometer value\r\n");
 		return ret;
