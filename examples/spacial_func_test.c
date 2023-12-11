@@ -6,7 +6,7 @@
 
 int main(void) {
     clock_t prev_time, curr_time;
-    double delta_t;
+    float delta_t;
 
     prev_time = clock();
     curr_time = clock();
@@ -17,16 +17,19 @@ int main(void) {
     acc_vec_t raw_acceleration;
     vector_t acceleration[3] = {0,0,0};
     vector_t velocity[3] = {0,0,0};
+    vector_t velocities[2][3] = {{0,0,0},{0,0,0}};
+    vector_t normal[3] = {0,0,0};
     float speed = 0;
     vector_t position[3] = {0,0,0};
+    float slope = 0;
     float arc_length = 0;
     
     // Type ctrl + c to end program
     while(1) {
         curr_time = clock();
         printf("\n----Starting of data, prev_time = %ld cycles----", prev_time);
-        delta_t = (double)(curr_time - prev_time) / CLOCKS_PER_SEC; // Number seconds since last clock cycle recorded
-        
+        delta_t = (curr_time - prev_time) / CLOCKS_PER_SEC; // Number seconds since last clock cycle recorded
+
         raw_acceleration = get_current_acceleration();
         acceleration[x] = raw_acceleration.x;
         acceleration[y] = raw_acceleration.y;
@@ -46,9 +49,19 @@ int main(void) {
         speed = magnitude(velocity);
         printf("Speed: %f\n", speed);
 
+        velocities[curr] = velocity;
+
+        // Calculate and display normal vector (cross product of velocity and acceleration)
+        cross(acceleration, velocity, normal);
+        printf("Normal Vector(Cross): <%f, %f, %f>", normal[x], normal[y], normal[z])
+
         // Calculate and display position
         vector_euler_step(velocity, position, delta_t);
         printf("Position: <%f, %f, %f>\n", position[x], position[y], position[z]);
+
+        // Calculate and display slope
+        set_slope(velocities, slope, delta_t);
+        printf("Slope: %f\n", slope);
 
         // Calculate and display distance/arc length (odometer) - (integrate speed in respect to time)
         euler_step(magnitude(velocity), &arc_length, delta_t);
@@ -56,6 +69,8 @@ int main(void) {
         
         prev_time = curr_time;
         printf("End of data, curr_time = %ld\n", curr_time);
+
+        velocities[prev] = velocity;
     }
 
     return 0;
